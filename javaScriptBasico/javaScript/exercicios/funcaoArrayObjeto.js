@@ -26,5 +26,3 @@ function meuEscopo() {
     form.addEventListener("submit", receberEventoForm);
 }  
 meuEscopo();
-
-
