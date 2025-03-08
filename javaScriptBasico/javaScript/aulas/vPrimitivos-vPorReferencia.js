@@ -23,7 +23,7 @@ console.log(a, b)
 a.push(4) // a alteração será feita tanto em a quanto em b 
 console.log(a, b)
 
-b.pop(); // a alteração será feita tanto em b quanto em a 
+b.pop(); // a alteração será feita tanto em b quanto em a   
 console.log(b, a)
 
 c.pop(); // a alteração será feita apenas em c 
