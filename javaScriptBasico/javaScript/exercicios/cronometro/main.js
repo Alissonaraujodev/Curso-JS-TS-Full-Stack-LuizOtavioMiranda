@@ -3,7 +3,10 @@ let p = document.querySelector('#timer');
 let botaoIniciar = document.querySelector('#iniciar');
 let timer;
 let intervalId;
-
+let mostraPausar = document.querySelector('#mostraPausar');
+let mostraZerar = document.querySelector('#mostraZerar');
+let temposPausados = [];
+let temposZerados = [];
 
 function zero(num){
     return num >= 10 ? num : `0${num}`;
@@ -23,7 +26,6 @@ function atualizaTimer(){
 }
 
 function iniciar(){
-    clearInterval(intervalId)
     intervalId = setInterval(function(){
         timer.setSeconds(timer.getSeconds() + 1);
         atualizaTimer();
@@ -35,6 +37,8 @@ function iniciar(){
 function pausar(){
     clearInterval(intervalId); 
     p.style.color = 'red'
+    temposPausados.push(p.innerHTML);
+    mostraTempoPausado()
 }
 
 function zerar(){
@@ -43,10 +47,27 @@ function zerar(){
     clearInterval(intervalId); 
     botaoIniciar.innerHTML = 'Iniciar'
     p.style.color = 'black'
+    temposZerados.push(tempoZerar);
+    mostraTempoZerado();
+    temposPausados = [];
+    mostraTempoPausado();
 }
 
 mostraTimerZerado(); 
 
+ function mostraTempoPausado(){
+    mostraPausar.innerHTML = 'Tempos Pausados';
+    for(let tempo of temposPausados){
+        mostraPausar.innerHTML += `<p>${tempo}</p>`;
+    }
+ }
+ 
+function mostraTempoZerado(){
+    mostraZerar.innerHTML = 'Tempos Zerados';
+    for(let tempo of temposZerados){
+        mostraZerar.innerHTML += `<p>${tempo}</p>`;
+    }
+}
 
 
 
