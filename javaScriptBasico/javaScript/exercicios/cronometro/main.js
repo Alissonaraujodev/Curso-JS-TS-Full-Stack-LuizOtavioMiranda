@@ -1,61 +1,102 @@
 
-let p = document.querySelector('#timer');
+let cronometro = document.querySelector('#cronometro');
 let botaoIniciar = document.querySelector('#iniciar');
-let timer;
+let botaoVoltar = document.querySelector('#voltar');
+let tempoInicial;
 let intervalId;
-let mostraPausar = document.querySelector('#mostraPausar');
-let mostraZerar = document.querySelector('#mostraZerar');
-let temposPausados = [];
-let temposZerados = [];
+botaoVoltar.disabled = true;
+
 
 function zero(num){
     return num >= 10 ? num : `0${num}`;
 }
 
+function zeroMilli(num){
+    if(num < 10){
+        return `00${num}`;
+    }else if(num < 100){
+        return `0${num}`;
+    }else{
+        return `${num}`;
+    }
+}
+
 function mostraTimerZerado(){
-    timer = new Date('01-01-1979 00:00:00:00');
-    atualizaTimer();
-    
+    tempoInicial = new Date('01-01-1979 00:00:00');
+    atualizaTimer();   
 }
 
 function atualizaTimer(){
-    let hora = zero(timer.getHours());
-    let minutos = zero(timer.getMinutes());
-    let segundos = zero(timer.getSeconds());
-    p.innerHTML = `${hora}:${minutos}:${segundos}`;
+    let minutos = zero(tempoInicial.getMinutes());
+    let segundos = zero(tempoInicial.getSeconds());
+    let millesegundos = zeroMilli(tempoInicial.getMilliseconds());
+    cronometro.innerHTML = `${minutos}:${segundos}.${millesegundos}`;
 }
+
+botaoIniciar.addEventListener('click', function(){
+    if(botaoIniciar.innerHTML === 'Iniciar' || botaoIniciar.innerHTML === 'Retomar') {
+        iniciar();
+    }else if(botaoIniciar.innerHTML === 'Parar'){
+        parar();
+    }
+})
 
 function iniciar(){
+    clearInterval(intervalId)
     intervalId = setInterval(function(){
-        timer.setSeconds(timer.getSeconds() + 1);
+        tempoInicial.setMilliseconds(tempoInicial.getMilliseconds() + 10);
+        if(tempoInicial.getMilliseconds() >= 1000){
+            tempoInicial.setSeconds(tempoInicial.getSeconds() + 1);
+            tempoInicial.setMilliseconds(0);
+        }
+        if(tempoInicial.getSeconds() >= 60){
+            tempoInicial.setMinutes(tempoInicial.getMinutes() + 1);
+            tempoInicial.setSeconds(0);
+        }
         atualizaTimer();
-    }, 1000)
-    botaoIniciar.innerHTML = 'Continuar'
-    p.style.color = 'black'
+    }, 10)
+    botaoIniciar.innerHTML = 'Parar'
+    botaoVoltar.disabled = false;
 }
 
-function pausar(){
-    clearInterval(intervalId); 
-    p.style.color = 'red'
-    temposPausados.push(p.innerHTML);
-    mostraTempoPausado()
+function parar(){
+    clearInterval(intervalId);
+    botaoIniciar.innerHTML = 'Retomar';
+    botaoVoltar.innerHTML = 'Restaurar';
 }
 
-function zerar(){
-    let tempoZerar = p.innerHTML;
+botaoVoltar.addEventListener('click', function(){
+    if(botaoVoltar.innerHTML === 'Voltar'){
+        voltar()
+    }else if(botaoVoltar.innerHTML === 'Restaurar'){
+        restaurar();
+    }
+})
+
+function voltar(){
+    
+}
+
+function restaurar(){
     mostraTimerZerado();
-    clearInterval(intervalId); 
-    botaoIniciar.innerHTML = 'Iniciar'
-    p.style.color = 'black'
-    temposZerados.push(tempoZerar);
-    mostraTempoZerado();
-    temposPausados = [];
-    mostraTempoPausado();
+    clearInterval(intervalId);   
+    botaoVoltar.innerHTML = 'Voltar';
+    botaoIniciar.innerHTML = 'Iniciar';
+    botaoVoltar.disabled = true;
 }
 
-mostraTimerZerado(); 
+mostraTimerZerado();
 
- function mostraTempoPausado(){
+
+
+
+
+
+
+
+
+
+/*function mostraTempoPausado(){
     mostraPausar.innerHTML = 'Tempos Pausados';
     for(let tempo of temposPausados){
         mostraPausar.innerHTML += `<p>${tempo}</p>`;
@@ -68,6 +109,7 @@ function mostraTempoZerado(){
         mostraZerar.innerHTML += `<p>${tempo}</p>`;
     }
 }
+    */
 
 
 

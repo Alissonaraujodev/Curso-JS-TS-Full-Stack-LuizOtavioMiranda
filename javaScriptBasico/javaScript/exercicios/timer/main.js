@@ -38,7 +38,6 @@ function pausar(){
 }
 
 function zerar(){
-    let tempoZerar = p.innerHTML;
     mostraTimerZerado();
     clearInterval(intervalId); 
     botaoIniciar.innerHTML = 'Iniciar'
