@@ -28,3 +28,12 @@ body{
 #timer{
     font-size: 40px;
 }
+
+.container div { /* Aplica o flexbox apenas ao div dentro do container */
+    display: flex;
+    justify-content: space-between; /* Distribui o espaço entre os parágrafos */
+}
+
+#voltas, #tempoDaVoltaAtual, #tempoGeralDeVoltas {
+    width: 30%; /* Ajuste a largura conforme necessário */
+}

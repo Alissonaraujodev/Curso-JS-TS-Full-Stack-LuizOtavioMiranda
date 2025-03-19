@@ -1,10 +1,16 @@
 
 let cronometro = document.querySelector('#cronometro');
 let botaoIniciar = document.querySelector('#iniciar');
-let botaoVoltar = document.querySelector('#voltar');
+let botaoVolta = document.querySelector('#volta');
+let tempoGeralDeVoltas = document.querySelector('#tempoGeralDeVoltas');
+let voltas = document.querySelector('#voltas');
+let tempoDaVoltaAtual = document.querySelector('#tempoDaVoltaAtual')
 let tempoInicial;
 let intervalId;
-botaoVoltar.disabled = true;
+botaoVolta.disabled = true;
+let numeroDeVoltas = [];
+let listaDasVoltas = [];
+let listaTemposGerais = [];
 
 
 function zero(num){
@@ -34,10 +40,12 @@ function atualizaTimer(){
 }
 
 botaoIniciar.addEventListener('click', function(){
-    if(botaoIniciar.innerHTML === 'Iniciar' || botaoIniciar.innerHTML === 'Retomar') {
+    if(botaoIniciar.innerHTML === 'Iniciar') {
         iniciar();
     }else if(botaoIniciar.innerHTML === 'Parar'){
         parar();
+    }else if(botaoIniciar.innerHTML === 'Retomar'){
+        retomar();
     }
 })
 
@@ -56,60 +64,121 @@ function iniciar(){
         atualizaTimer();
     }, 10)
     botaoIniciar.innerHTML = 'Parar'
-    botaoVoltar.disabled = false;
+    botaoVolta.disabled = false;
 }
 
 function parar(){
     clearInterval(intervalId);
     botaoIniciar.innerHTML = 'Retomar';
-    botaoVoltar.innerHTML = 'Restaurar';
+    botaoVolta.innerHTML = 'Restaurar';
 }
 
-botaoVoltar.addEventListener('click', function(){
-    if(botaoVoltar.innerHTML === 'Voltar'){
-        voltar()
-    }else if(botaoVoltar.innerHTML === 'Restaurar'){
+function retomar(){
+    iniciar();
+    botaoVolta.innerHTML = 'Volta';
+}
+
+botaoVolta.addEventListener('click', function(){
+    if(botaoVolta.innerHTML === 'Volta'){
+        volta()
+    }else if(botaoVolta.innerHTML === 'Restaurar'){
         restaurar();
     }
 })
 
-function voltar(){
+function volta(){
+    quantidadeDeVoltas();
+    tempoDaVolta();
+    tempoGeral();
+    segundoCronometro();
+}
+
+function quantidadeDeVoltas(){
+    //voltas.innerHTML = `Número de voltas<br>${listaDasVoltas.length + 1}`;
+    let voltaN = cronometro.innerHTML;
+    numeroDeVoltas.push(voltaN);
+    voltas.innerHTML = `Volta<br>`;
+    for(let i = 0; i < numeroDeVoltas.length; i++){
+        const numeroDaVolta = document.createElement('div');
+        numeroDaVolta.textContent = i + 1;
+        voltas.appendChild(numeroDaVolta);
+    }
+}
+
+function tempoDaVolta(){
+    let tempoVolta = cronometro.innerHTML;
+    let tempoEmMilissegundos = converteTempoParaMilissegundos(tempoVolta);
+    listaDasVoltas.push(tempoEmMilissegundos);
     
+    tempoDaVoltaAtual.innerHTML = `Tempo das voltas<br>${formataMilissegundos(listaDasVoltas[0])}`;
+    
+    if (listaDasVoltas.length === 1) {
+        const primeiraVolta = document.createElement("div");
+        tempoDaVoltaAtual.appendChild(primeiraVolta);
+    }
+    
+    if(listaDasVoltas.length > 1){
+        while (tempoDaVoltaAtual.children.length > 1) {
+            tempoDaVoltaAtual.removeChild(tempoDaVoltaAtual.lastChild);
+        }
+
+        for(let i = 1; i < listaDasVoltas.length; i++){
+            let diferenca = listaDasVoltas[i] - listaDasVoltas[i -1];
+            let diferencaFormatada = formataMilissegundos(diferenca)
+           
+            const diferencaItem = document.createElement('div');
+            diferencaItem.textContent = diferencaFormatada;
+            tempoDaVoltaAtual.appendChild(diferencaItem);
+        }
+    } 
+}
+
+function converteTempoParaMilissegundos(tempo){
+    let [minutos, segundosComMilissegundos] = tempo.split(":");
+    let [segundos, milissegundos] = segundosComMilissegundos.split(".");
+
+    return(
+        parseInt(minutos) * 60000 +
+        parseInt(segundos) * 1000 +
+        parseInt(milissegundos)
+    );
+}
+
+function formataMilissegundos(milissegundos){
+    let minutos = Math.floor(milissegundos / 60000);
+    let segundos = Math.floor((milissegundos % 60000) / 1000);
+    let milissegundosRestante = milissegundos % 1000;
+
+    return `${zero(minutos)}:${zero(segundos)}.${zeroMilli(milissegundosRestante)}`
+}
+
+function tempoGeral(){
+    let tempoVoltaSomado = cronometro.innerHTML;
+    listaTemposGerais.push(tempoVoltaSomado);
+    tempoGeralDeVoltas.innerHTML = `Tempo geral<br>`;
+    for(let i = 0; i < listaTemposGerais.length; i++){
+        const geralItem = document.createElement('div');
+        geralItem.textContent = listaTemposGerais[i];
+        tempoGeralDeVoltas.appendChild(geralItem);
+    }
 }
 
 function restaurar(){
     mostraTimerZerado();
     clearInterval(intervalId);   
-    botaoVoltar.innerHTML = 'Voltar';
+    botaoVolta.innerHTML = 'Volta';
     botaoIniciar.innerHTML = 'Iniciar';
-    botaoVoltar.disabled = true;
+    botaoVolta.disabled = true;
+    numeroDeVoltas = [];
+    listaDasVoltas = [];
+    listaTemposGerais = [];
+    tempoDaVoltaAtual.innerHTML = '';
+    tempoGeralDeVoltas.innerHTML = '';
+    voltas.innerHTML = '';
 }
 
 mostraTimerZerado();
 
-
-
-
-
-
-
-
-
-
-/*function mostraTempoPausado(){
-    mostraPausar.innerHTML = 'Tempos Pausados';
-    for(let tempo of temposPausados){
-        mostraPausar.innerHTML += `<p>${tempo}</p>`;
-    }
- }
- 
-function mostraTempoZerado(){
-    mostraZerar.innerHTML = 'Tempos Zerados';
-    for(let tempo of temposZerados){
-        mostraZerar.innerHTML += `<p>${tempo}</p>`;
-    }
-}
-    */
 
 
 
