@@ -1,4 +1,3 @@
-
 let cronometro = document.querySelector('#cronometro');
 let botaoIniciar = document.querySelector('#iniciar');
 let botaoVolta = document.querySelector('#volta');
@@ -7,11 +6,10 @@ let voltas = document.querySelector('#voltas');
 let tempoDaVoltaAtual = document.querySelector('#tempoDaVoltaAtual')
 let tempoInicial;
 let intervalId;
-botaoVolta.disabled = true;
 let numeroDeVoltas = [];
 let listaDasVoltas = [];
 let listaTemposGerais = [];
-
+botaoVolta.disabled = true;
 
 function zero(num){
     return num >= 10 ? num : `0${num}`;
