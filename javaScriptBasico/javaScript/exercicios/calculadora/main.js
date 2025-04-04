@@ -13,8 +13,11 @@ let somaBtn = document.querySelector('#soma')
 let subtracaoBtn = document.querySelector('#subtracao')
 let divisaoBtn = document.querySelector('#divisao')
 let multiplicacaoBtn = document.querySelector('#multiplicacao')
+let porcentagemBtn = document.querySelector('#porcentagem')
+let virgulaBtn = document.querySelector('#virgula')
+let elevadoBtn = document.querySelector('#elevado')
 let resultadoBtn = document.querySelector('#resultado')
-//let limparBtn = document.querySelector('#limpar')
+let limparBtn = document.querySelector('#limpar')
 let listaDeNumeros = [];
 let operadorSelecionado = null;
 let primeiroNumero = null;
@@ -101,66 +104,143 @@ noveBtn.addEventListener('click', function(){
     }
 })
 
-function limparBtn(){
+limparBtn.addEventListener('click', function(){
     visor.innerHTML = '';
     listaDeNumeros = [];
     operadorSelecionado = null;
     primeiroNumero = null; 
-}
+})
+
+elevadoBtn.addEventListener('click', function(){
+    if(visor.innerHTML !== ''){
+        if(primeiroNumero === null){
+            primeiroNumero = parseFloat(visor.innerHTML);
+        }else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
+            }
+            visor.innerHTML = primeiroNumero;
+        }
+        operadorSelecionado = '^';
+        visor.innerHTML = '';   
+    }
+})
+
+porcentagemBtn.addEventListener('click', function(){
+    if(visor.innerHTML !== ''){
+        if(primeiroNumero === null){
+            primeiroNumero = parseFloat(visor.innerHTML);
+        }
+        else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
+            }
+            visor.innerHTML = primeiroNumero;
+        }
+        operadorSelecionado = '%';
+        visor.innerHTML = ''; 
+    }
+})
 
 somaBtn.addEventListener('click', function(){
     if(visor.innerHTML !== ''){
         if(primeiroNumero === null){
             primeiroNumero = parseFloat(visor.innerHTML);
-        }else{
-            if(operadorSelecionado){
-                const segundoNumero = parseFloat(visor.innerHTML);
-                switch(operadorSelecionado){
-                    case '+':
-                        primeiroNumero += segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero -= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero *= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero /= segundoNumero;
-                        break;
-                }
+        }else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
             }
+            visor.innerHTML = primeiroNumero;
         }
-        visor.innerHTML = ''
-        operadorSelecionado = '+'
-    }  
+        operadorSelecionado = '+';
+        visor.innerHTML = '';    
+    }     
 });
 
 subtracaoBtn.addEventListener('click', function(){
     if(visor.innerHTML !== ''){
         if(primeiroNumero === null){
             primeiroNumero = parseFloat(visor.innerHTML);
-        }else{
-            if(operadorSelecionado){
-                const segundoNumero = parseFloat(visor.innerHTML);
-                switch(operadorSelecionado){
-                    case '+':
-                        primeiroNumero += segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero -= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero *= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero /= segundoNumero;
-                        break;
-                }
+        }else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
             }
-        }
-        visor.innerHTML = ''
-        operadorSelecionado = '-'
+            visor.innerHTML = primeiroNumero;
+        }  
+        operadorSelecionado = '-';
+        visor.innerHTML = ''; 
     }  
 });
 
@@ -168,27 +248,32 @@ divisaoBtn.addEventListener('click', function(){
     if(visor.innerHTML !== ''){
         if(primeiroNumero === null){
             primeiroNumero = parseFloat(visor.innerHTML);
-        }else{
-            if(operadorSelecionado){
-                const segundoNumero = parseFloat(visor.innerHTML);
-                switch(operadorSelecionado){
-                    case '+':
-                        primeiroNumero += segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero -= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero *= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero /= segundoNumero;
-                        break;
-                }
+        }else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
             }
+            visor.innerHTML = primeiroNumero;
         }
-        visor.innerHTML = ''
-        operadorSelecionado = '/'
+        operadorSelecionado = '/';
+        visor.innerHTML = '';    
     }  
 });
 
@@ -196,30 +281,41 @@ multiplicacaoBtn.addEventListener('click', function(){
     if(visor.innerHTML !== ''){
         if(primeiroNumero === null){
             primeiroNumero = parseFloat(visor.innerHTML);
-        }else{
-            if(operadorSelecionado){
-                const segundoNumero = parseFloat(visor.innerHTML);
-                switch(operadorSelecionado){
-                    case '+':
-                        primeiroNumero += segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero -= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero *= segundoNumero;
-                        break;
-                    case '+':
-                        primeiroNumero /= segundoNumero;
-                        break;
-                }
+        }else if (operadorSelecionado) {
+            const segundoNumero = parseFloat(visor.innerHTML);
+            switch(operadorSelecionado){
+                case '+':
+                    primeiroNumero += segundoNumero;
+                    break;
+                case '-':
+                    primeiroNumero -= segundoNumero;
+                    break;
+                case '/':
+                    primeiroNumero /= segundoNumero;
+                    break;
+                case '*':
+                    primeiroNumero *= segundoNumero;
+                    break;
+                case '%':
+                    primeiroNumero = (primeiroNumero / 100) * segundoNumero;
+                    break;
+                case '^':
+                    primeiroNumero **= segundoNumero;
+                    break;
             }
+            visor.innerHTML = primeiroNumero;
         }
-        visor.innerHTML = ''
-        operadorSelecionado = '*'
+        operadorSelecionado = '*';
+        visor.innerHTML = ''; 
     }  
 });
 
+virgulaBtn.addEventListener('click', function(){
+    if(visor.innerHTML.includes('.')){
+        return;
+    }
+    visor.innerHTML += '.';
+});
 
 resultadoBtn.addEventListener('click', function(){
     if(visor.innerHTML !== '' && primeiroNumero !== null && operadorSelecionado){
@@ -237,36 +333,20 @@ resultadoBtn.addEventListener('click', function(){
             case '*':
                 visor.innerHTML = primeiroNumero * segundoNumero;
                 break;
+            case '%':
+                visor.innerHTML = (primeiroNumero / 100) * segundoNumero;
+                break;
+            case '^':
+                visor.innerHTML = primeiroNumero ** segundoNumero;
+                break;
         }
         primeiroNumero = null;
         operadorSelecionado = null;
         listaDeNumeros = []
     }else if (visor.innerHTML !== '') {
-       
         visor.innerHTML = visor.innerHTML;
     } else {
         visor.innerHTML = 'Erro';
     }
 });
 
-/*
-function pegaNumeroVisor(){
-    let visorArray = visor.innerHTML;
-    listaDeNumeros.push(visorArray);  
-}
-*/
-
-
-/*
-function calculadora(operador, acumulador, ...numeros){
-    for(let numero of numeros){
-        if(operador === '+') acumulador += numero;
-        if(operador === '-') acumulador -= numero;
-        if(operador === '/') acumulador /= numero;
-        if(operador === '*') acumulador *= numero;
-    }
-    console.log(acumulador)
-}
-
-calculadora('+', 0 , 0, 3)
-*/
