@@ -1,4 +1,4 @@
-function criarCalculadora(){
+function criaCalculadora(){
     return{
         display: document.querySelector('.display'),
 
@@ -25,7 +25,7 @@ function criarCalculadora(){
             });
         },
 
-        ralizaConta(){
+        realizaConta(){
             let conta = this.display.value;
             try{
                 conta = eval(conta);
@@ -45,12 +45,13 @@ function criarCalculadora(){
         clearDisplay(){
             this.display.value = '';
         },
+
         apagaUm(){
             this.display.value = this.display.value.slice(0, -1);
         },
      
         cliqueBotoes(){
-            document.addEventListener('click', (e) => {
+            document.addEventListener('click', e => {
                 const el = e.target;
 
                 if(el.classList.contains('btn-num')){
@@ -79,6 +80,6 @@ function criarCalculadora(){
     };
 }
 
-const calculadora = criarCalculadora();
+const calculadora = criaCalculadora();
 calculadora.inicia();
 
