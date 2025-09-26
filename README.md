@@ -27,4 +27,4 @@ O curso oferece um aprendizado aprofundado nas seguintes tecnologias e conceitos
 
 Progresso Atual:
 
-Atualmente, estou na Seção 4: Funções (Avançado).
+Atualmente, estou na Seção 5: Arrays (Avançado).
