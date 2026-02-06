@@ -8,7 +8,7 @@ let umaString = "O rato roeu a roupa do rei de roma."
 
 //console.log(umaString[4]);  //[i]para consultar um indice especifico.
 //console.log(umaString.charAt(5));  //charAt(i) para consultar um indice especifico.
-//console.log(umaString.indexOf("string")); // indexOf(***) para consultar o indice de algum elemento 
+//console.log(umaString.indexOf("")); // indexOf(***) para consultar o indice de algum elemento 
 //console.log(umaString.indexOf("g", 3)); // indexOf(***, i) para consultar o indice de algum elemento partindo de um determinado indice 
 //console.log(umaString.lastIndexOfindexOf("string")); // lastIndexof(***) faz a consulta começando pelo ultimo indice
 //console.log(umaString.match(/[a-z]/g)); //match(/[a-z]/g) expressão regular para buscar elementos especificados na expressão regular.

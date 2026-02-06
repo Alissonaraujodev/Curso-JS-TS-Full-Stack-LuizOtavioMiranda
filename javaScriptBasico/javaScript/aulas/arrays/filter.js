@@ -2,7 +2,7 @@ const numeros = [5 , 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
 
 const numerosFiltrados = numeros.filter(valor=> valor > 10);
 
-//console.log(numerosFiltrados);
+console.log(numerosFiltrados);
 
 const pessoas = [
     {nome: 'Luiz', idade: 62 },
@@ -20,4 +20,4 @@ const pessoasNomeTerminaA = pessoas.filter(obj => obj.nome.at(-1) == 'a');
 
 //console.log(pessoaComNomeGrande);
 //console.log(pessoasComMais50Anos);
-console. log(pessoasNomeTerminaA);
+//console. log(pessoasNomeTerminaA);
