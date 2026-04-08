@@ -29,7 +29,7 @@ function CC(agencia, conta, saldo, limite){
 }
 
 CC.prototype = Object.create(Conta.prototype);
-CC.prototype.contructor = CC;
+CC.prototype.constructor = CC;
 
 CC.prototype.sacar = function (valor) {
     if(valor > this.saldo + this.limite) {
