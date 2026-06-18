@@ -1,0 +1,17 @@
+{
+  "name": "cursojavascript",
+  "version": "1.0.0",
+  "description": "Este repositório foi criado para armazenar e organizar os projetos e códigos desenvolvidos durante o curso \"JavaScript e TypeScript - front-end e back-end (Full Stack)\" do professor Luiz Otávio Miranda, na plataforma Udemy. O curso tem como objetivo me capacitar para atuar como desenvolvedor Full Stack, cobrindo tanto o lado do cliente quanto o do servidor.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7"
+  }
+}
